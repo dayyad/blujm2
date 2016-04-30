@@ -16,10 +16,11 @@ public class Engine
     protected final double height = bot-top;
 
     public Engine()
-    {
+    {   
         UI.initialise();
         UI.setImmediateRepaint(false);
         idCount=0;
+        
     }
 
     public int generateId(){
@@ -28,21 +29,38 @@ public class Engine
         return id;
     }
 
-    public void tick()
-    {
-        if(gameObjects.size()>0){
-            for(int i=0;i<gameObjects.size();i++){
-                if(gameObjects.get(i) instanceof Moveable){
-                    Moveable moveableTemp = (Moveable)(gameObjects.get(i));
-                    moveableTemp.move();
-                }
-                if (gameObjects.get(i) instanceof Drawable){
-                    Drawable drawableTemp = (Drawable)(gameObjects.get(i));
-                    drawableTemp.draw();
+    public void run()
+    {   
+        while(true){
+            if(gameObjects.size()>0){
+                for(int i=0;i<gameObjects.size();i++){
+                    if(gameObjects.get(i) instanceof Moveable){
+                        Moveable moveableTemp = (Moveable)(gameObjects.get(i));
+                        moveableTemp.move();
+                    }
+                    if (gameObjects.get(i) instanceof Drawable){
+                        Drawable drawableTemp = (Drawable)(gameObjects.get(i));
+                        drawableTemp.draw();
+                    }
                 }
             }
+            UI.repaintGraphics();
         }
-        UI.repaintGraphics();
+    }
+
+    public void loadScene(String scene){
+
+    }
+
+    public final static void main(){
+        Engine engine = new Engine();
+        
+        MobObject mob1= new MobObject(engine,"assets/character_main.png",30,30);
+        engine.gameObjects.add(mob1);
+        UI.println(engine.gameObjects.size());
+        
+        engine.run();
+        
     }
 }
 
