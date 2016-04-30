@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=engine\ x\ y
+comment0.target=MobObject(Engine,\ double,\ double)
+comment1.params=x\ y
+comment1.target=boolean\ canMove(double,\ double)
+comment2.params=
+comment2.target=void\ move()
+comment3.params=
+comment3.target=void\ draw()
+numComments=4
