@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.params=engine\ image\ x\ y
 comment0.target=MobObject(Engine,\ java.lang.String,\ double,\ double)
-comment1.params=action
-comment1.target=void\ changeVel(java.lang.String)
-comment2.params=x\ y
-comment2.target=boolean\ canMove(double,\ double)
+comment1.params=x\ y
+comment1.target=boolean\ canMove(double,\ double)
+comment2.params=vec
+comment2.target=void\ setDirection(double[])
 comment3.params=
 comment3.target=void\ move()
 comment4.params=

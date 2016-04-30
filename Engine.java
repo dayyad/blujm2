@@ -15,11 +15,39 @@ public class Engine
     protected final double width = right-left;
     protected final double height = bot-top;
 
+    private MobObject hero;
+
+    
     public Engine()
     {   
         UI.initialise();
         UI.setImmediateRepaint(false);
+        
         idCount=0;
+
+        hero= new MobObject(this,"assets/character_main.png",130,130);
+        this.gameObjects.add(hero);
+        
+        UI.setMouseMotionListener(this::doMouseMove);
+    }
+    
+
+    private void doMouseMove(String action,double x,double y){
+        
+        
+        
+        double op = x - hero.x;
+        double ad = y- hero.y;
+        
+        double angle = Math.atan(op/ad);
+        double vecLength = Math.sqrt(op*op + ad*ad);
+        double[] normVec={op/vecLength,ad/vecLength};
+        //angle = angle/(Math.PI)*180;
+        UI.println(vecLength);
+        
+        if(action.equals("pressed")){
+            hero.setDirection(normVec);
+        }
         
     }
 
@@ -54,13 +82,8 @@ public class Engine
 
     public final static void main(){
         Engine engine = new Engine();
-        
-        MobObject mob1= new MobObject(engine,"assets/character_main.png",30,30);
-        engine.gameObjects.add(mob1);
-        UI.println(engine.gameObjects.size());
-        
+
         engine.run();
-        
     }
 }
 
