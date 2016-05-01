@@ -7,46 +7,49 @@ public class Engine
 
     int idCount;
 
+    long timer1=0;
+    long timer2=0;
+    long timeElapsed;
+
     protected static final double top=0;
-    protected static final double bot=500;
+    protected static final double bot=1956;
     protected static final double left=0;
-    protected static final double right=400;
+    protected static final double right=2880;
 
     protected final double width = right-left;
     protected final double height = bot-top;
 
     private Hero hero;
     private Background background;
-    
+
     public Engine()
     {   
         UI.initialise();
         UI.setImmediateRepaint(false);
-        
+
         idCount=0;
-        
-        
+
         background=new Background(this,"assets/map_test_1.png");
         hero= new Hero(this,"assets/character_main.png",130,130);
-        this.gameObjects.add(hero);
         this.gameObjects.add(background);
-        
+        this.gameObjects.add(hero);
+
         UI.setMouseMotionListener(this::doMouseMove);
     }
 
     private void doMouseMove(String action,double x,double y){
-        
+
         double op = x - hero.x;
         double ad = y- hero.y;
-        
+
         double angle = Math.atan(op/ad);
         double vecLength = Math.sqrt(op*op + ad*ad);
         double[] normVec={op/vecLength,ad/vecLength};
-       
+
         if(action.equals("pressed")){
             hero.setDirection(normVec);
         }
-        
+
     }
 
     public int generateId(){
@@ -58,6 +61,10 @@ public class Engine
     public void run()
     {   
         while(true){
+            if(timer2!=0){
+                timer1=System.currentTimeMillis();
+            }
+            timeElapsed+=timer1-timer2;
             if(gameObjects.size()>0){
                 for(int i=0;i<gameObjects.size();i++){
                     if(gameObjects.get(i) instanceof Moveable){
@@ -69,8 +76,14 @@ public class Engine
                         drawableTemp.draw();
                     }
                 }
+                if (timeElapsed>30){
+                    UI.println("sss");
+                    UI.repaintGraphics();
+                    timeElapsed=0;
+                }
             }
-            UI.repaintGraphics();
+
+            timer2=System.currentTimeMillis();
         }
     }
 
@@ -80,7 +93,6 @@ public class Engine
 
     public final static void main(){
         Engine engine = new Engine();
-
         engine.run();
     }
 }
