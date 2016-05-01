@@ -38,7 +38,8 @@ public class Engine
     }
 
     private void doMouseMove(String action,double x,double y){
-
+        x-=100;
+        y-=100;
         double op = x -hero.x;
         double ad = y -hero.y;
 
