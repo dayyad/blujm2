@@ -20,10 +20,13 @@ public class Inventory
         this.maxSize=maxSize;
     }
 
-    public void add(GameObject object){
-        
+    public boolean add(GameObject object){
+
         if (slot.size()<maxSize){
-          slot.add(object);
+            slot.add(object);
+            return true;
+        } else {
+            return false;
         }
     }
 

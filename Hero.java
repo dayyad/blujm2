@@ -18,7 +18,7 @@ public class Hero extends GameObject implements Moveable,Drawable
     public double yVel;
 
     private int currentFrame=0;
-    private Inventory inventory;
+    public Inventory inventory;
     private int inventorySize =10;
 
     long timer1=0;

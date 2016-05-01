@@ -24,6 +24,10 @@ public class Loot extends GameObject implements Lootable,Drawable
         this.y=y;
     }
     
+    public boolean pickup(Hero hero){
+        return hero.inventory.add(this.object);
+    }
+    
     public void draw(){
         
         Weapon tempWeapon = (Weapon)(object);

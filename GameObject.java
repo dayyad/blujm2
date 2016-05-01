@@ -3,7 +3,7 @@ import java.util.*;
 
 public class GameObject
 {
-   int id;
+   public int id;
     
     public GameObject(Engine engine,String name)
     {

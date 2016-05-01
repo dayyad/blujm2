@@ -39,7 +39,7 @@ public class Engine
     }
     
     private void spawnLoot(){
-        Loot loot1 = new Loot(this,new Weapon(this,"Weapon","assets/Weapons/Pipe.png",1,20),500,500);
+        Loot loot1 = new Loot(this,new Weapon(this,"Weapon","pipe","assets/Weapons/Pipe.png",1,20),500,500);
         
     }
 
@@ -63,6 +63,15 @@ public class Engine
         int id = idCount;
         idCount++;
         return id;
+    }
+    
+    private void removeGameObject(int id){
+        for(int i=0;i<gameObjects.size();i++){
+            if(gameObjects.get(i).id==id){
+                gameObjects.remove(i);
+                return;
+            }
+        }
     }
 
     public void run()
@@ -90,7 +99,11 @@ public class Engine
                         if (yDif<0){yDif=yDif*-1;}
 
                         if (xDif+yDif<hero.lootRange){
-
+                            if (lootTemp.pickup(this.hero)){
+                                this.hero.equip((Weapon)(lootTemp.object));
+                                removeGameObject(lootTemp.id);
+                                this.run();
+                            }
                         }
                     }
                     if (gameObjects.get(i) instanceof Drawable){
