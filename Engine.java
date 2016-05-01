@@ -8,7 +8,7 @@ public class Engine
     int idCount;
 
     protected static final double top=0;
-    protected static final double bot=200;
+    protected static final double bot=500;
     protected static final double left=0;
     protected static final double right=400;
 

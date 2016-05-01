@@ -86,7 +86,7 @@ public class Hero extends GameObject implements Moveable,Drawable
         
         if(xVel!=0 || yVel!=0){
             timeElapsed+=(timer1-timer2);
-            if(timeElapsed>1000){
+            if(timeElapsed>500){
                 nextFrame();
                 timeElapsed=0;
             }
