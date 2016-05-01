@@ -18,6 +18,8 @@ public class Hero extends GameObject implements Moveable,Drawable
     public double yVel;
 
     private int currentFrame=0;
+    private Inventory inventory;
+    private int inventorySize =10;
 
     long timer1=0;
     long timer2=0;
@@ -27,6 +29,9 @@ public class Hero extends GameObject implements Moveable,Drawable
     private String[] frameFnames ={"assets/character_main_walk_1.png","assets/character_main_walk_2.png","assets/character_main_walk_1.png","assets/character_main_walk_3.png","assets/character_main_walk_4.png","assets/character_main_walk_3.png"};
     private BufferedImage[] frames;
     private BufferedImage[] renderFrames;
+    private Weapon equipped;
+    
+    public double lootRange=150;
 
     double drag;
 
@@ -34,11 +39,12 @@ public class Hero extends GameObject implements Moveable,Drawable
 
     public Hero(Engine engine,String image,double x, double y)
     {
-        super(engine,"Mob");
+        super(engine,"Hero");
         xVel=4;
         yVel=4;
-
         drag=0.01;
+        
+        this.inventory=new Inventory(this,inventorySize);
         this.image=image;
         bufferFrames();
 
@@ -76,6 +82,10 @@ public class Hero extends GameObject implements Moveable,Drawable
         } else{
             currentFrame=0;
         }
+    }
+    
+    public void equip(Weapon weapon){
+        equipped = weapon;
     }
 
     public void move(){
@@ -119,7 +129,6 @@ public class Hero extends GameObject implements Moveable,Drawable
                  rotationRequired =(Math.atan(vec[0]/vec[1]));
                  rotationRequired+=(Math.PI/2 - rotationRequired) * 2 +Math.PI;
             }
-            UI.println(vec[0] +" "+vec[1]);
             
             double locationX = x-frames[currentFrame].getWidth()/2;
             double locationY = y-frames[currentFrame].getHeight()/2;

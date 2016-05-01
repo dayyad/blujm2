@@ -25,6 +25,7 @@ public class Engine
     public Engine()
     {   
         UI.initialise();
+        UI.setDivider(0);
         //UI.setImmediateRepaint(false);
 
         idCount=0;
@@ -62,10 +63,10 @@ public class Engine
     public void run()
     {   
         while(true){
-            
+
             timer1=System.currentTimeMillis();
             timeElapsed+=timer1-timer2;
-            
+
             timer2 = timer1;
             if(gameObjects.size()>0){
 
@@ -74,17 +75,29 @@ public class Engine
                         Moveable moveableTemp = (Moveable)(gameObjects.get(i));
                         moveableTemp.move();
                     }
+
+                    if(gameObjects.get(i) instanceof Lootable){
+                        Loot lootTemp=(Loot)(gameObjects.get(i));
+                        double xDif = lootTemp.x-hero.x;
+                        double yDif = lootTemp.y-hero.y;
+
+                        if (xDif<0){xDif=xDif*-1;}
+                        if (yDif<0){yDif=yDif*-1;}
+
+                        if (xDif+yDif<hero.lootRange){
+
+                        }
+                    }
                     if (gameObjects.get(i) instanceof Drawable){
                         Drawable drawableTemp = (Drawable)(gameObjects.get(i));
                         drawableTemp.draw();
                     }
                 }
 
-
             }
             UI.sleep(20);
-             UI.repaintAllGraphics();
-            
+            UI.repaintAllGraphics();
+
             //timer2=System.currentTimeMillis();
         }
     }

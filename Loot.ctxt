@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.params=engine\ object\ x\ y
+comment0.target=Loot(Engine,\ GameObject,\ double,\ double)
+numComments=1
