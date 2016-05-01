@@ -2,7 +2,7 @@ import ecs100.*;
 import java.util.*;
 import java.awt.event.*;
 
-public class MobObject extends GameObject implements Moveable,Drawable
+public class Hero extends GameObject implements Moveable,Drawable
 {
     Engine engine;
     public double x;
@@ -11,21 +11,27 @@ public class MobObject extends GameObject implements Moveable,Drawable
     public double xVel;
     public double yVel;
     
+    private int currentFrame=0;
+    
+    long timer1=0;
+    long timer2=0;
+    long timeElapsed;
+    
+    
     private double[] vec = {0,0};
+    private String[] frames ={"assets/character_main_walk_1.png","assets/character_main_walk_2.png","assets/character_main_walk_1.png","assets/character_main_walk_3.png","assets/character_main_walk_4.png","assets/character_main_walk_3.png"};
 
     double drag;
     
     String image;
      
 
-    public MobObject(Engine engine,String image,double x, double y)
+    public Hero(Engine engine,String image,double x, double y)
     {
         super(engine,"Mob");
-        xVel=0.2;
-        yVel=0.2;
+        xVel=0.4;
+        yVel=0.4;
         
-
-
         drag=0.01;
         this.image=image;
 
@@ -42,6 +48,14 @@ public class MobObject extends GameObject implements Moveable,Drawable
     
     public void setDirection(double[] vec){
         this.vec=vec;
+    }
+    
+    private void nextFrame(){
+        if(currentFrame< frames.length-1){
+            currentFrame++;
+        } else{
+            currentFrame=0;
+        }
     }
 
     public void move(){
@@ -62,33 +76,24 @@ public class MobObject extends GameObject implements Moveable,Drawable
         } else if (y>engine.bot){
             y=engine.bot-1;
         }
-
-//         if (xVel>0){ //Applies drag
-//             xVel-=drag;
-//             if(xVel<0){
-//                 xVel=0;
-//             }
-//         } else if(xVel<0){
-//             xVel+=drag;
-//             if(xVel>0){
-//                 xVel=0;
-//             }
-//         } 
-
-//         if (yVel>0){
-//             yVel-=drag;
-//             if(yVel<0){
-//                 yVel=0;
-//             }
-//         } else if (yVel<0){
-//             yVel+=drag;
-//             if(yVel>0){
-//                 yVel=0;
-//             }
-//         }
+       
     }
 
     public void draw(){
-        UI.drawImage(image,x,y);
+        if(timer2!=0){
+            timer1=System.currentTimeMillis();
+        }
+        
+        if(xVel!=0 || yVel!=0){
+            timeElapsed+=(timer1-timer2);
+            if(timeElapsed>1000){
+                nextFrame();
+                timeElapsed=0;
+            }
+        }
+        
+        
+        UI.drawImage(frames[currentFrame],x,y);
+        timer2=System.currentTimeMillis();
     }
 }

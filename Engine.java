@@ -15,8 +15,8 @@ public class Engine
     protected final double width = right-left;
     protected final double height = bot-top;
 
-    private MobObject hero;
-
+    private Hero hero;
+    private Background background;
     
     public Engine()
     {   
@@ -24,17 +24,17 @@ public class Engine
         UI.setImmediateRepaint(false);
         
         idCount=0;
-
-        hero= new MobObject(this,"assets/character_main.png",130,130);
+        
+        
+        background=new Background(this,"assets/map_test_1.png");
+        hero= new Hero(this,"assets/character_main.png",130,130);
         this.gameObjects.add(hero);
+        this.gameObjects.add(background);
         
         UI.setMouseMotionListener(this::doMouseMove);
     }
-    
 
     private void doMouseMove(String action,double x,double y){
-        
-        
         
         double op = x - hero.x;
         double ad = y- hero.y;
@@ -42,9 +42,7 @@ public class Engine
         double angle = Math.atan(op/ad);
         double vecLength = Math.sqrt(op*op + ad*ad);
         double[] normVec={op/vecLength,ad/vecLength};
-        //angle = angle/(Math.PI)*180;
-        UI.println(vecLength);
-        
+       
         if(action.equals("pressed")){
             hero.setDirection(normVec);
         }

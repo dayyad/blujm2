@@ -24,8 +24,6 @@ public class MobObject extends GameObject implements Moveable,Drawable
         xVel=0.2;
         yVel=0.2;
         
-
-
         drag=0.01;
         this.image=image;
 
