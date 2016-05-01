@@ -29,8 +29,8 @@ public class Hero extends GameObject implements Moveable,Drawable
     public Hero(Engine engine,String image,double x, double y)
     {
         super(engine,"Mob");
-        xVel=0.4;
-        yVel=0.4;
+        xVel=4;
+        yVel=4;
         
         drag=0.01;
         this.image=image;
@@ -86,7 +86,7 @@ public class Hero extends GameObject implements Moveable,Drawable
         
         if(xVel!=0 || yVel!=0){
             timeElapsed+=(timer1-timer2);
-            if(timeElapsed>500){
+            if(timeElapsed>300){
                 nextFrame();
                 timeElapsed=0;
             }

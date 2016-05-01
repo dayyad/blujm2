@@ -39,8 +39,8 @@ public class Engine
 
     private void doMouseMove(String action,double x,double y){
 
-        double op = x - hero.x;
-        double ad = y- hero.y;
+        double op = x -hero.x;
+        double ad = y -hero.y;
 
         double angle = Math.atan(op/ad);
         double vecLength = Math.sqrt(op*op + ad*ad);
@@ -61,11 +61,15 @@ public class Engine
     public void run()
     {   
         while(true){
-            if(timer2!=0){
-                timer1=System.currentTimeMillis();
-            }
+            
+            timer1=System.currentTimeMillis();
+            
             timeElapsed+=timer1-timer2;
+            
+            timer2 = timer1;
+            //UI.clearGraphics();
             if(gameObjects.size()>0){
+
                 for(int i=0;i<gameObjects.size();i++){
                     if(gameObjects.get(i) instanceof Moveable){
                         Moveable moveableTemp = (Moveable)(gameObjects.get(i));
@@ -76,14 +80,13 @@ public class Engine
                         drawableTemp.draw();
                     }
                 }
-                if (timeElapsed>30){
-                    UI.println("sss");
-                    UI.repaintGraphics();
-                    timeElapsed=0;
-                }
-            }
 
-            timer2=System.currentTimeMillis();
+
+            }
+            UI.sleep(30);
+             UI.repaintAllGraphics();
+            
+            //timer2=System.currentTimeMillis();
         }
     }
 
