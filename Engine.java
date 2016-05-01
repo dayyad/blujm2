@@ -25,7 +25,7 @@ public class Engine
     public Engine()
     {   
         UI.initialise();
-        UI.setImmediateRepaint(false);
+        //UI.setImmediateRepaint(false);
 
         idCount=0;
 
@@ -64,11 +64,9 @@ public class Engine
         while(true){
             
             timer1=System.currentTimeMillis();
-            
             timeElapsed+=timer1-timer2;
             
             timer2 = timer1;
-            //UI.clearGraphics();
             if(gameObjects.size()>0){
 
                 for(int i=0;i<gameObjects.size();i++){
@@ -84,7 +82,7 @@ public class Engine
 
 
             }
-            UI.sleep(30);
+            UI.sleep(20);
              UI.repaintAllGraphics();
             
             //timer2=System.currentTimeMillis();
