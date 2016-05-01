@@ -34,8 +34,13 @@ public class Engine
         hero= new Hero(this,"assets/character_main.png",130,130);
         this.gameObjects.add(background);
         this.gameObjects.add(hero);
-
+        this.spawnLoot();
         UI.setMouseMotionListener(this::doMouseMove);
+    }
+    
+    private void spawnLoot(){
+        Loot loot1 = new Loot(this,new Weapon(this,"Weapon","assets/Weapons/Pipe.png",1,20),500,500);
+        
     }
 
     private void doMouseMove(String action,double x,double y){

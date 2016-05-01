@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 
-public class Loot extends GameObject implements Lootable
+public class Loot extends GameObject implements Lootable,Drawable
 {   
     public GameObject object;
     public double x;
@@ -22,5 +22,11 @@ public class Loot extends GameObject implements Lootable
         this.object = object;
         this.x=x;
         this.y=y;
+    }
+    
+    public void draw(){
+        
+        Weapon tempWeapon = (Weapon)(object);
+        UI.drawImage(tempWeapon.imageFname,x,y);
     }
 }
