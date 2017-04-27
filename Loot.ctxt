@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=engine\ object\ x\ y
+comment0.target=Loot(Engine,\ GameObject,\ double,\ double)
+comment1.params=hero
+comment1.target=boolean\ pickup(Hero)
+comment2.params=
+comment2.target=void\ draw()
+numComments=3

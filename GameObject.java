@@ -3,11 +3,12 @@ import java.util.*;
 
 public class GameObject
 {
-   int id;
+   public int id;
     
     public GameObject(Engine engine,String name)
     {
         id = engine.generateId();
+        engine.gameObjects.add(this);
     }
     
     public int id(){

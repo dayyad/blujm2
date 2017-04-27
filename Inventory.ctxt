@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=owner\ maxSize
+comment0.target=Inventory(Hero,\ int)
+comment1.params=object
+comment1.target=boolean\ add(GameObject)
+numComments=2
